@@ -1,46 +1,69 @@
 # Mac Duo Enhanced
 
-把 iPhone Duo 的合盖折叠玻璃动画带到 MacBook 上，并让动画更明显、更灵敏。
+把 iPhone Duo 的合盖折叠玻璃动画带到 MacBook，并让动画更明显、更灵敏。
+
+An enhanced fork of [sumimakito/Mac-Duo](https://github.com/sumimakito/Mac-Duo).
+
+---
+
+## 中文说明
+
+本项目是 [sumimakito/Mac-Duo](https://github.com/sumimakito/Mac-Duo) 的增强分支，在原版「合盖时桌面倾斜、磨砂玻璃模糊、渐隐」的折叠动画基础上，把效果调得更夸张、触发更早，一眼就能看到。
+
+### 更灵敏
+
+- 触发角度 `90° → 112°`，几乎一压盖就开始。
+- 传感器轮询 `8/30 Hz → 15/60 Hz`。
+- 判定合盖速度 `2 °/s → 1.2 °/s`。
+- 预测提前量更大，快速合盖也能立刻触发。
+
+### 更明显
+
+- 最大模糊 `135 → 220 pt`
+- 折叠幅度 `1.0 → 1.8`
+- 全屏磨砂占比 `0 → 0.3`
+- 变暗范围 `0.5 → 0.8`
+- 透视距离 `6.0 → 4.2`
+- 满效果行程 `60° → 28°`
+- 模糊 / 变暗曲线更陡，起效更快
+
+这些默认值位于 `Sources/MacDuo/Preferences.swift`，运行时参数位于 `Sources/MacDuo/LidController.swift` 和 `Sources/MacDuo/BlurGradient.swift`。
+
+### 构建
+
+需要 Xcode 与 Swift 6.0 以上：
+
+```sh
+./build.sh
+```
+
+构建产物为 `build/Mac Duo.app`。本地重编译为 ad-hoc 签名，macOS 会再次要求「屏幕录制」授权。
+
+## 感谢原作者 / Acknowledgements
+
+本项目基于 [sumimakito/Mac-Duo](https://github.com/sumimakito/Mac-Duo)（Apache-2.0，Copyright 2026 Makito）。衷心感谢原作者 **Makito** 的优秀设计与完整实现，以及 [Moeru AI](https://github.com/moeru-ai) 在签名、公证与发布上的支持。原项目中的合盖角度传感器驱动、Metal 渲染器、ScreenCaptureKit 集成等核心工作均出自原项目，本分支只做了动画参数增强。
+
+---
+
+## English
 
 This is an enhanced fork of [sumimakito/Mac-Duo](https://github.com/sumimakito/Mac-Duo)
 (Apache-2.0, Copyright 2026 Makito). All credit for the original design, Metal
-renderer, lid-angle sensor, and ScreenCaptureKit integration goes to the upstream
-author and [Moeru AI](https://github.com/moeru-ai).
+renderer, lid-angle sensor, and ScreenCaptureKit integration goes to the
+upstream author and [Moeru AI](https://github.com/moeru-ai).
 
-## What changed
+### What changed
 
-The fork re-tunes the animation for a stronger, earlier, more responsive fold.
+- Trigger angle `90° → 112°`; sensor polling `8/30 Hz → 15/60 Hz`; closing-speed
+  trigger `2 °/s → 1.2 °/s`; earlier prediction.
+- Max blur `135 → 220 pt`, fold recession `1.0 → 1.8`, whole-picture frost
+  `0 → 0.3`, dimming reach `0.5 → 0.8`, viewing distance `6.0 → 4.2`,
+  full-effect travel `60° → 28°`, steeper blur/dim curves.
 
-### More sensitive
+See `Sources/MacDuo/Preferences.swift`, `LidController.swift`, and
+`BlurGradient.swift` for the exact values.
 
-- Trigger angle: `90°` → `112°`, so barely closing the lid starts the effect.
-- Sensor polling: idle `8 Hz` → `15 Hz`, active `30 Hz` → `60 Hz`.
-- Closing-speed trigger: `2 °/s` → `1.2 °/s`.
-- Prediction floor: `40 °/s` → `18 °/s`; latency `0.04 s` → `0.05 s`.
-- Pre-warm closing speed: `8 °/s` → `5 °/s`.
-
-### More obvious
-
-- Max blur: `135 pt` → `220 pt`.
-- Fold recession: `1.0` → `1.8`.
-- Whole-picture frost: `0.0` → `0.3`.
-- Dimming reach: `0.5` → `0.8`.
-- Perspective viewing distance: `6.0` → `4.2`.
-- Full-effect travel: `60°` → `28°`.
-- Blur curve: `1.6` → `1.15`; dim curve: `0.7` → `0.55`.
-- Slider ranges widened (`Blur` up to `320 pt`, `Lean back` up to `4×`).
-
-These are the default values in `Sources/MacDuo/Preferences.swift` plus the
-runtime constants in `Sources/MacDuo/LidController.swift` and
-`Sources/MacDuo/BlurGradient.swift`.
-
-## Requirements
-
-- macOS 14 or later.
-- A MacBook with a compatible built-in lid angle sensor.
-- Screen Recording permission, granted when the app first starts the effect.
-
-## Build
+### Build
 
 Xcode with Swift 6.0 or later:
 
@@ -48,14 +71,8 @@ Xcode with Swift 6.0 or later:
 ./build.sh
 ```
 
-Or build and relaunch in one step:
-
-```sh
-./build.sh --run
-```
-
-The result is `build/Mac Duo.app`. A local rebuild is ad-hoc signed, so macOS
-will ask for Screen Recording permission again.
+The result is `build/Mac Duo.app`. A local ad-hoc rebuild requires granting
+Screen Recording permission again.
 
 ## License
 
