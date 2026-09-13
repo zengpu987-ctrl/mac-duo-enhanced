@@ -1,0 +1,3 @@
+<resources>
+    <style name="Theme.MacDuo" parent="Theme.AppCompat.DayNight.NoActionBar" />
+</resources>

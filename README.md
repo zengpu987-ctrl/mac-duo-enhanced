@@ -4,6 +4,8 @@
 
 An enhanced fork of [sumimakito/Mac-Duo](https://github.com/sumimakito/Mac-Duo).
 
+安卓版已加入本仓库，见 [android/README.md](android/README.md)。
+
 ---
 
 ## 中文说明
