@@ -125,6 +125,12 @@ cd mac-duo-enhanced
 6. **外接显示器上没有效果**
    - 该效果只作用于 MacBook 内置屏幕。
 
+7. **反复弹「屏幕录制」授权 / 想根治**
+   - 根本原因：只要重新签名 App（例如 ad-hoc `codesign -s -`），代码签名身份就变了，macOS 会把它当成新程序重新要授权。
+   - 根治办法：使用官方公证 DMG（Developer ID 签名，身份稳定），授权一次后永久记住，不再重签。
+   - 不要把文件直接塞进 `.app` 包体（例如自定义图标），因为改包体就必须重签名。
+   - 想要自定义图标又不破坏签名：用访达「显示简介 → 把图片拖到左上角图标处」（存的是元数据，不改变包体），或直接使用默认图标。
+
 ---
 
 ## English Guide (macOS 26 and later)
@@ -217,6 +223,12 @@ The output is `build/Mac Duo.app`. A local build is ad-hoc signed, so macOS will
 
 6. **No effect on an external display**
    - The effect only applies to the built-in display.
+
+7. **Screen Recording keeps asking / how to fix it permanently**
+   - Root cause: re-signing the app (for example ad-hoc `codesign -s -`) changes its code-signing identity, so macOS treats it as a new app and asks again.
+   - Permanent fix: use the official notarized DMG (Developer ID signature, stable identity); grant once and it sticks. Do not re-sign.
+   - Do not write files directly into the `.app` bundle (e.g. custom icons), because changing the bundle requires re-signing.
+   - To set a custom icon without breaking the signature, use Finder → Get Info → drag an image onto the icon at the top-left corner, or keep the default icon.
 
 ---
 
