@@ -6,6 +6,21 @@ An enhanced fork of [sumimakito/Mac-Duo](https://github.com/sumimakito/Mac-Duo).
 
 安卓版 / Android version：[android/README.md](android/README.md)
 
+## 应用图标
+
+仓库内含 Apple 风格图标（白底黑 Apple 标）：
+
+- `assets/AppIcon.icns`：macOS 应用图标。
+- `assets/AppIcon-preview.png`：1024×1024 预览图。
+- `tools/make_icon.swift`：图标生成脚本。
+
+生成方式：
+
+```sh
+swift tools/make_icon.swift AppIcon.iconset
+iconutil -c icns AppIcon.iconset -o AppIcon.icns
+```
+
 ---
 
 ## 中文说明（macOS 26 及以上）
